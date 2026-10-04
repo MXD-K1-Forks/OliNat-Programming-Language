@@ -124,7 +124,7 @@ void registerRandomSymbols(TypeChecker* checker, struct ASTparser* parser, struc
     randParams[0].type = VALUE_INT;
     randParams[0].name = "num";
     randParams[0].length = 3;
-    registerNativeSymbol(checker, "seed" , 4, VALUE_FLOAT ,randParams , 1, parser, vm); //seed(int)
+    registerNativeSymbol(checker, "seed" , 4, VALUE_EMPTY ,randParams , 1, parser, vm); //seed(int)
 
     //random native -manny
     ParamInfo randParams2[2];
