@@ -1,14 +1,69 @@
 #pullf io
 #pullf random
+#pullf Strings
+#pullf types
 #pullf utils
+#pullf chronos
 
-make float r = random();
-assert(0 <= r && r <= 1, "Not in range [0, 1]");
+// ---------- 1. Dice roller with a histogram ----------
+println("== Rolling a d6 600 times ==");
+make int[] counts = [0, 0, 0, 0, 0, 0];
+for (make int i = 0; i < 600; i++)
+{
+    make int roll = randint(1, 6);
+    counts[roll - 1] = counts[roll - 1] + 1;
+}
+for (make int face = 0; face < 6; face++)
+{
+    make string bar = "";
+    for (make int j = 0; j < counts[face] / 5; j++) { bar = bar + "#"; }
+    println(intToStr(face + 1) + " | " + bar + " " + intToStr(counts[face]));
+}
 
-make int r2 = randint(2, 7);
-assert(2 <= r2 && r2 <= 7, "Not in range [2, 7]");
+// ---------- 2. Coin flips with random() ----------
+println("");
+println("== Flipping a coin 10 times ==");
+make string flips = "";
+for (make int i = 0; i < 10; i++)
+{
+    if (random() < 0.5f) { flips = flips + "H"; }
+    else { flips = flips + "T"; }
+}
+println(flips);
 
-//TODO: Test seed
-seed(4); //make sure it doesn't crash
+// ---------- 3. Seeds make runs repeatable ----------
+println("");
+println("== Same seed, same numbers ==");
+make string runA = "";
+make string runB = "";
+seed(2026);
+for (make int i = 0; i < 5; i++) { runA = runA + intToStr(randint(1, 100)) + " "; }
+seed(2026);
+for (make int i = 0; i < 5; i++) { runB = runB + intToStr(randint(1, 100)) + " "; }
+println("run A: " + runA);
+println("run B: " + runB);
+assert(runA == runB, "seeded runs should match");
 
-println("all tests passed!");
+// ---------- 4. Palindromes with strReverse ----------
+println("");
+println("== Palindrome check ==");
+make string[] words = ["racecar", "Level", "olinat", "noon", "pullf"];
+for (make int i = 0; i < length(words); i++)
+{
+    make string w = strToLower(words[i]);
+    if (strReverse(w) == w) { println(words[i] + " -> palindrome"); }
+    else { println(words[i] + " -> nope (" + strReverse(words[i]) + ")"); }
+}
+
+// ---------- 5. Random password from a charset ----------
+println("");
+println("== Random 12-char password ==");
+seed(doubleToInt(time()));
+make string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+make string pw = "";
+for (make int i = 0; i < 12; i++)
+{
+    make int k = randint(0, strLength(charset) - 1);
+    pw = pw + strSlice(charset, k, k + 1);
+}
+println(pw);

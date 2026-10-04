@@ -33,6 +33,11 @@ if (MINGW)
     target_link_options(Oli_Nat PRIVATE -static -static-libgcc)
 endif()
 
+#for the WASM compilation for the webstie, otherwise you get a recursion error
+if (EMSCRIPTEN)
+    target_link_options(Oli_Nat PRIVATE -sSTACK_SIZE=5MB)
+endif()
+
 #debugging options for checking memory addresses
 #target_compile_options(Oli_Nat PRIVATE -fsanitize=address -g)
 #target_link_options(Oli_Nat PRIVATE -fsanitize=address)
