@@ -1,6 +1,17 @@
-![Oli-Nat-Banner](/assets/Oli-Nat-Logo-Banner.png)
+<p align="center">
+  <img src="assets/Oli-Nat-Logo-Banner.png" alt="Oli-Nat Programming Language" width="auto" />
+</p>
 
-A statically-typed bytecode VM language built in C from scratch.
+<p align="center">
+<strong>A statically-typed bytecode VM language built in C from scratch.</strong>
+</p>
+
+<p align="center">
+  <a href="https://olinat.net"><strong>Documentation</strong></a> ·
+  <a href="https://olinat.net/playground">Playground</a> ·
+  <a href="https://github.com/NateTheGrappler/OliNat-Programming-Language">Doc Site Source</a>
+</p>
+
 
 ## Overview
 
